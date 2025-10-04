@@ -93,8 +93,8 @@ async function loadSession() {
         console.log('[🔰] Downloading MEGA.nz session...');
         
         // Remove "IK~" prefix if present, otherwise use full SESSION_ID
-        const megaFileId = config.SESSION_ID.startsWith('IMMU~') 
-            ? config.SESSION_ID.replace("IMMU~", "") 
+        const megaFileId = config.SESSION_ID.startsWith('QADEER-MD~') 
+            ? config.SESSION_ID.replace("QADEER-MD~", "") 
             : config.SESSION_ID;
 
         const filer = File.fromURL(`https://mega.nz/file/${megaFileId}`);
@@ -119,7 +119,7 @@ async function loadSession() {
 //=======SESSION-AUTH==============
 
 async function connectToWA() {
-    console.log("[🔰] IMMU-MD Connecting to WhatsApp ⏳️...");
+    console.log("[🔰] QADEER-MD Connecting to WhatsApp ⏳️...");
     
     // Load session if available
     const creds = await loadSession();
