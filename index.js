@@ -69,52 +69,20 @@ const {
 
 //=============================================
 
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 9090;
+//===================SESSION-AUTH============================
+if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
+const sessdata = config.SESSION_ID.replace("QADEER-MD~", '');
+const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
+filer.download((err, data) => {
+if(err) throw err
+fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
+console.log("SESSION DOWNLOADED SUCCESSFULLY ✅")
+})})}
   
-  //===================SESSION-AUTH============================
-const sessionDir = path.join(__dirname, 'sessions');
-const credsPath = path.join(sessionDir, 'creds.json');
-
-// Create session directory if it doesn't exist
-if (!fs.existsSync(sessionDir)) {
-    fs.mkdirSync(sessionDir, { recursive: true });
-}
-
-async function loadSession() {
-    try {
-        if (!config.SESSION_ID) {
-            console.log('No SESSION_ID provided - QR login will be generated');
-            return null;
-        }
-
-        console.log('[⏳] Downloading creds data...');
-        console.log('[🔰] Downloading MEGA.nz session...');
-        
-        // Remove "IK~" prefix if present, otherwise use full SESSION_ID
-        const megaFileId = config.SESSION_ID.startsWith('QADEER-MD~') 
-            ? config.SESSION_ID.replace("QADEER-MD~", "") 
-            : config.SESSION_ID;
-
-        const filer = File.fromURL(`https://mega.nz/file/${megaFileId}`);
-            
-        const data = await new Promise((resolve, reject) => {
-            filer.download((err, data) => {
-                if (err) reject(err);
-                else resolve(data);
-            });
-        });
-        
-        fs.writeFileSync(credsPath, data);
-        console.log('[✅] MEGA session downloaded successfully');
-        return JSON.parse(data.toString());
-    } catch (error) {
-        console.error('❌ Error loading session:', error.message);
-        console.log('Will generate QR code instead');
-        return null;
-    }
-}
+  const express = require("express");
+  const app = express();
+  const port = process.env.PORT || 8000;
 
 //=======SESSION-AUTH==============
 
