@@ -122,7 +122,7 @@ async function connectToWA() {
                 console.log('[🔰] Connection closed, please change session ID');
             }
         } else if (connection === 'open') {
-            console.log('[🔰] IMMU MD connected to WhatsApp ✅');
+            console.log('[🔰] QADEER MD connected to WhatsApp ✅');
             
             
             // Load plugins
